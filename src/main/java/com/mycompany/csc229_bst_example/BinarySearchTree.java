@@ -49,7 +49,7 @@ public class BinarySearchTree {
         }
         return insertNode(tmpNode, data);
     }
-
+    // ToDo 1: complete InOrder Traversal
     public void inOrderTraversal() {
         doInOrder(this.root);
     }
@@ -57,51 +57,53 @@ public class BinarySearchTree {
     private void doInOrder(BstNode root) {
         if (root != null) {
             doInOrder(root.getLeft());
+            //Prints data of the current node
             System.out.print(root.getData() + " ");
             doInOrder(root.getRight());
         }
     }
-
+    // ToDo 2: complete the pre-order travesal
     public void preOrderTraversal() {
         doPreOrder(this.root);
     }
 
     private void doPreOrder(BstNode root) {
-        // ToDo 1: complete InOrder Traversal
+
         if (root != null) {
+            //Prints data of the current node
             System.out.print(root.getData() + " ");
-            // ToDo 2: complete the pre-order travesal
             doPreOrder(root.getLeft());
             doPreOrder(root.getRight());
         }
     }
-
+    // ToDo 3: Find the height of a tree
     public int findHeight() {
         return getHeight(root);
     }
-    // ToDo 3: Find the height of a tree
+    //The helper method to find the height of the tree
     private int getHeight(BstNode node) {
         if (node == null)
             return 0;
         int leftHeight = getHeight(node.getLeft());
         int rightHeight = getHeight(node.getRight());
+        // Returns the max height of both left and right subtrees and the current node
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    //ToDo 4: complete getDepth of a node
     public int getDepth(BstNode node) {
-        //ToDo 4: complete getDepth of a node
         return findDepth(root, node, 0);
     }
-
+    //The helper method to find the depth of the node
     private int findDepth(BstNode root, BstNode node, int depth) {
         if (root == null)
-            return -1;
+            return -1; //Node not found
         if (root == node)
-            return depth;
+            return depth; //Node found
         int leftDepth = findDepth(root.getLeft(), node, depth + 1);
         if (leftDepth != -1)
-            return leftDepth;
-        return findDepth(root.getRight(), node, depth + 1);
+            return leftDepth; // If the node is found in the left subtree, return its depth
+        return findDepth(root.getRight(), node, depth + 1); //searches right subtree
     }
 
     public void print() {
@@ -111,9 +113,9 @@ public class BinarySearchTree {
 
     private void print(String prefix, BstNode node, boolean isLeft) {
         if (node != null) {
-            System.out.println(prefix + (isLeft ? "|-- " : "\\-- ") + node.getData());
-            print(prefix + (isLeft ? "|   " : "    "), node.getLeft(), true);
-            print(prefix + (isLeft ? "|   " : "    "), node.getRight(), false);
+            System.out.println(prefix + (isLeft ? "|-- " : "\\-- ") + node.getData());//Prints the node
+            print(prefix + (isLeft ? "|   " : "    "), node.getLeft(), true);//Prints left subtree
+            print(prefix + (isLeft ? "|   " : "    "), node.getRight(), false);//Prints right subtree
         }
     }
 }
